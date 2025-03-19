@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:EngeTerraPlan.ViewModels"
+             x:Class="EngeTerraPlan.Views.DensidadeInSituView"
+             Title="Densidade IN-SITU">
+
+    <!-- Configurar o BindingContext -->
+    <ContentPage.BindingContext>
+        <vm:DensidadeInSituViewModel />
+    </ContentPage.BindingContext>
+
+    <ContentPage.Content>
+        <ScrollView>
+            <VerticalStackLayout Padding="20" Spacing="20">
+                <!-- Título da página -->
+                <Label Text="Cadastro Densidade IN-SITU"
+                       FontSize="24"
+                       TextColor="blue"
+                       FontAttributes="Bold"
+                       HorizontalOptions="Center"
+                       Margin="0,0,0,20" />
+
+                <!-- Campo Data -->
+                <HorizontalStackLayout Spacing="10">
+                    <Label Text="Data:"
+                           FontAttributes="Bold"
+                           VerticalOptions="Center"
+                           WidthRequest="120" />
+                    <DatePicker Date="{Binding Data}" 
+                                Format="dd/MM/yyyy"
+                                HorizontalOptions="FillAndExpand" />
+                </HorizontalStackLayout>
+
+                <!-- Campo Estaca/Local -->
+                <HorizontalStackLayout Spacing="10">
+                    <Label Text="Estaca/Local:"
+                           FontAttributes="Bold"
+                           VerticalOptions="Center"
+                           WidthRequest="120" />
+                    <Entry Placeholder="Digite a estaca ou local"
+                           Text="{Binding Estaca}"
+                           HorizontalOptions="FillAndExpand" />
+                </HorizontalStackLayout>
+
+                <!-- Campo Estaca/Local -->
+                <HorizontalStackLayout Spacing="10">
+                    <Label Text="Estaca/Local:"
+                           FontAttributes="Bold"
+                           VerticalOptions="Center"
+                           WidthRequest="120" />
+                    <Entry Placeholder="Digite a estaca ou local"
+                           Text="{Binding Estaca}"
+                           HorizontalOptions="FillAndExpand" />
+                </HorizontalStackLayout>
+
+                <!-- Campo Camada -->
+                <HorizontalStackLayout Spacing="10">
+                    <Label Text="Camada:"
+                           FontAttributes="Bold"
+                           VerticalOptions="Center"
+                           WidthRequest="120" />
+                    <Entry Placeholder="Descrição da camada"
+                           Text="{Binding Camada}"
+                           HorizontalOptions="FillAndExpand" />
+                </HorizontalStackLayout>
+
+                <!-- Campo Profundidade do Furo -->
+                <HorizontalStackLayout Spacing="10">
+                    <Label Text="Prof. Furo (cm):"
+                           FontAttributes="Bold"
+                           VerticalOptions="Center"
+                           WidthRequest="120" />
+                    <Entry Placeholder="Digite a profundidade"
+                           Keyboard="Numeric"
+                           Text="{Binding ProfundidadeFuro}"
+                           HorizontalOptions="FillAndExpand" />
+                </HorizontalStackLayout>
+
+                <!-- Campo Espessura da Camada -->
+                <HorizontalStackLayout Spacing="10">
+                    <Label Text="Esp. Camada (cm):"
+                           FontAttributes="Bold"
+                           VerticalOptions="Center"
+                           WidthRequest="120" />
+                    <Entry Placeholder="Digite a espessura"
+                           Keyboard="Numeric"
+                           Text="{Binding EspessuraCamada}"
+                           HorizontalOptions="FillAndExpand" />
+                </HorizontalStackLayout>
+
+                <!-- Campo Posição com RadioButtons -->
+                <VerticalStackLayout Spacing="10" Margin="0,10,0,0">
+                    <Label Text="Posição:"
+                           FontAttributes="Bold"
+                           VerticalOptions="Center"
+                           Margin="0,0,0,5" />
+                    <HorizontalStackLayout Spacing="20" HorizontalOptions="Center">
+                        <RadioButton Content="Esquerda"
+                                     GroupName="Posicao"
+                                     IsChecked="{Binding PosicaoEsquerda}" />
+                        <RadioButton Content="Centro"
+                                     GroupName="Posicao"
+                                     IsChecked="{Binding PosicaoCentro}" />
+                        <RadioButton Content="Direita"
+                                     GroupName="Posicao"
+                                     IsChecked="{Binding PosicaoDireita}" />
+                    </HorizontalStackLayout>
+                </VerticalStackLayout>
+
+                <!-- Botão Avançar -->
+                <Button Text="Avançar"
+                        BackgroundColor="Blue"
+                        TextColor="White"
+                        FontAttributes="Bold"
+                        HeightRequest="50"
+                        CornerRadius="10"
+                        Command="{Binding AvancarCommand}"
+                        HorizontalOptions="FillAndExpand"
+                        Margin="0,20,0,0" />
+            </VerticalStackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>
