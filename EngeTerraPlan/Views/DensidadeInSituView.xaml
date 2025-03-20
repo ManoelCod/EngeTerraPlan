@@ -285,7 +285,7 @@
                HorizontalOptions="Center"
                Margin="0,0,0,20" />
 
-                     
+
                         <!-- Campo: Densidade Solo Úmido -->
                         <HorizontalStackLayout Spacing="10">
                             <Label Text="Densi. Solo Úmido:"

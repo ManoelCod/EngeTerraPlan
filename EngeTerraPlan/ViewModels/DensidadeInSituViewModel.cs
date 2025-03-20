@@ -61,6 +61,7 @@ namespace EngeTerraPlan.ViewModels
             get => _posicaoSelecionada;
             set => SetProperty(ref _posicaoSelecionada, value);
         }
+
         // Propriedades para Formulário 3
         private double _densidadeSoloUmido;
         public double DensidadeSoloUmido
@@ -103,6 +104,7 @@ namespace EngeTerraPlan.ViewModels
             get => _grauCompactacao;
             set => SetProperty(ref _grauCompactacao, value);
         }
+
         // Controle de visibilidade dos formulários
         private bool _mostrarFormulario1 = true;
         public bool MostrarFormulario1
@@ -151,18 +153,21 @@ namespace EngeTerraPlan.ViewModels
             MostrarFormulario2 = false;
             MostrarFormulario3 = false;
         }
+
         private void ExibirFormulario2()
         {
             MostrarFormulario1 = false;
             MostrarFormulario2 = true;
             MostrarFormulario3 = false;
         }
+
         private void ExibirFormulario3()
         {
             MostrarFormulario1 = false;
             MostrarFormulario2 = false;
             MostrarFormulario3 = true;
         }
+
         private void SalvarDados()
         {
             // Criar o modelo com os dados do formulário
@@ -183,7 +188,13 @@ namespace EngeTerraPlan.ViewModels
                 VolumeFuro = this.VolumeFuro,
                 Umidade = this.Umidade,
                 TaraRecipiente = this.TaraRecipiente,
-                PesoSoloUmido = this.PesoSoloUmido
+                PesoSoloUmido = this.PesoSoloUmido,
+                DensidadeSoloUmido = this.DensidadeSoloUmido,
+                DensidadeSoloSeco = this.DensidadeSoloSeco,
+                RegistroAmostra = this.RegistroAmostra,
+                DensidadeMaxima = this.DensidadeMaxima,
+                UmidadeOtima = this.UmidadeOtima,
+                GrauCompactacao = this.GrauCompactacao
             };
 
             // Inserir no banco de dados
@@ -197,6 +208,9 @@ namespace EngeTerraPlan.ViewModels
             System.Diagnostics.Debug.WriteLine($"Peso Funil: {novoCadastro.PesoFunil}, Peso Furo: {novoCadastro.PesoFuro}");
             System.Diagnostics.Debug.WriteLine($"Densidade Areia: {novoCadastro.DensidadeAreia}, Volume Furo: {novoCadastro.VolumeFuro}");
             System.Diagnostics.Debug.WriteLine($"Umidade: {novoCadastro.Umidade}, Tara Recipiente: {novoCadastro.TaraRecipiente}, Peso Solo Úmido: {novoCadastro.PesoSoloUmido}");
+            System.Diagnostics.Debug.WriteLine($"Densidade Solo Úmido: {novoCadastro.DensidadeSoloUmido}, Densidade Solo Seco: {novoCadastro.DensidadeSoloSeco}");
+            System.Diagnostics.Debug.WriteLine($"Registro Amostra: {novoCadastro.RegistroAmostra}, Densidade Máxima: {novoCadastro.DensidadeMaxima}, Umidade Ótima: {novoCadastro.UmidadeOtima}");
+            System.Diagnostics.Debug.WriteLine($"Grau de Compactação: {novoCadastro.GrauCompactacao}");
 
             // Recuperar todos os registros e listar no terminal
             var todosRegistros = ObterTodosOsRegistros();
@@ -210,6 +224,9 @@ namespace EngeTerraPlan.ViewModels
                 System.Diagnostics.Debug.WriteLine($"Peso Funil: {registro.PesoFunil}, Peso Furo: {registro.PesoFuro}");
                 System.Diagnostics.Debug.WriteLine($"Densidade Areia: {registro.DensidadeAreia}, Volume Furo: {registro.VolumeFuro}");
                 System.Diagnostics.Debug.WriteLine($"Umidade: {registro.Umidade}, Tara Recipiente: {registro.TaraRecipiente}, Peso Solo Úmido: {registro.PesoSoloUmido}");
+                System.Diagnostics.Debug.WriteLine($"Densidade Solo Úmido: {registro.DensidadeSoloUmido}, Densidade Solo Seco: {registro.DensidadeSoloSeco}");
+                System.Diagnostics.Debug.WriteLine($"Registro Amostra: {registro.RegistroAmostra}, Densidade Máxima: {registro.DensidadeMaxima}, Umidade Ótima: {registro.UmidadeOtima}");
+                System.Diagnostics.Debug.WriteLine($"Grau de Compactação: {registro.GrauCompactacao}");
             }
 
             // Exibir mensagem de sucesso

@@ -25,5 +25,13 @@ namespace EngeTerraPlan.Models
         public double Umidade { get; set; }
         public double TaraRecipiente { get; set; }
         public double PesoSoloUmido { get; set; }
+
+        // Novos campos para o terceiro formulário
+        public double DensidadeSoloUmido { get; set; }
+        public double DensidadeSoloSeco { get; set; }
+        public string RegistroAmostra { get; set; }
+        public double DensidadeMaxima { get; set; }
+        public double UmidadeOtima { get; set; }
+        public string GrauCompactacao { get; set; }
     }
 }
