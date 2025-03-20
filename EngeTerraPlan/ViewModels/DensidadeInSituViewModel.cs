@@ -1,4 +1,5 @@
 ﻿using System.Windows.Input;
+using CalculationNBR;
 using EngeTerraPlan.Data;
 using EngeTerraPlan.Models;
 using Microsoft.Maui.Controls;
@@ -8,9 +9,6 @@ namespace EngeTerraPlan.ViewModels
     public class DensidadeInSituViewModel : BaseViewModel
     {
         // Propriedades para bindings simples (não precisam de SetProperty)
-        public double Antes { get; set; }
-        public double Depois { get; set; }
-        public double Diferenca { get; set; }
         public double PesoFunil { get; set; }
         public double PesoFuro { get; set; }
         public double DensidadeAreia { get; set; }
@@ -20,6 +18,36 @@ namespace EngeTerraPlan.ViewModels
         public double PesoSoloUmido { get; set; }
 
         // Propriedades que requerem notificações explícitas
+        private double _antes;
+        public double Antes
+        {
+            get => _antes;
+            set
+            {
+                SetProperty(ref _antes, value);
+                AtualizarDiferenca();
+            }
+        }
+
+        private double _depois;
+        public double Depois
+        {
+            get => _depois;
+            set
+            {
+                SetProperty(ref _depois, value);
+                AtualizarDiferenca();
+            }
+        }
+
+
+        private double _diferenca;
+        public double Diferenca
+        {
+            get => _diferenca;
+            set => SetProperty(ref _diferenca, value);
+        }
+
         private DateTime _data;
         public DateTime Data
         {
@@ -74,7 +102,11 @@ namespace EngeTerraPlan.ViewModels
         public double DensidadeSoloSeco
         {
             get => _densidadeSoloSeco;
-            set => SetProperty(ref _densidadeSoloSeco, value);
+            set
+            {
+                SetProperty(ref _densidadeSoloSeco, value);
+                AtualizarGrauCompactacao();
+            }
         }
 
         private string _registroAmostra;
@@ -236,6 +268,27 @@ namespace EngeTerraPlan.ViewModels
         public List<DensidadeInSituModel> ObterTodosOsRegistros()
         {
             return DatabaseService.Database.Table<DensidadeInSituModel>().ToList();
+        }
+
+
+        // Método para atualizar automaticamente a diferença
+        private void AtualizarDiferenca()
+        {
+            Diferenca = CalculationLibrary.CalcularDiferenca(Antes, Depois);
+        }
+
+        // Método para calcular o grau de compactação
+        private void AtualizarGrauCompactacao()
+        {
+            try
+            {
+                var grau = CalculationLibrary.CalcularCompactacao(DensidadeSoloSeco, DensidadeMaxima);
+                GrauCompactacao = $"{grau:F2} %";
+            }
+            catch (DivideByZeroException ex)
+            {
+                GrauCompactacao = "Erro: " + ex.Message;
+            }
         }
     }
 }

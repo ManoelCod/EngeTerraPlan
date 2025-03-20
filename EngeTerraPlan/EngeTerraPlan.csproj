@@ -67,6 +67,10 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <ProjectReference Include="..\CalculationNBR\CalculationNBR.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
 	  <MauiXaml Update="Views\DensidadeInSituView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
