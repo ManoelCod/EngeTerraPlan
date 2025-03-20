@@ -42,5 +42,19 @@
             return pesoSoloUmidoRec - taraRecipiente;
         }
 
+        public static double CalcularDensidadeSoloUmido(double pesoDoSoloUmido, double volumeFuro)
+        {
+            if (volumeFuro == 0)
+                throw new DivideByZeroException("O volume do furo não pode ser zero.");
+
+            return pesoDoSoloUmido / volumeFuro;
+        }
+        public static double CalcularDensidadeSoloSeco(double densidadeSoloUmido, double umidadePercentual)
+        {
+            if (umidadePercentual == 0)
+                throw new DivideByZeroException("A umidade percentual não pode ser zero.");
+
+            return densidadeSoloUmido / (umidadePercentual / 100);
+        }
     }
 }

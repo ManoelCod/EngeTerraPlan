@@ -9,7 +9,6 @@ namespace EngeTerraPlan.ViewModels
     public class DensidadeInSituViewModel : BaseViewModel
     {
         // Propriedades para bindings simples (não precisam de SetProperty)
-        public double Umidade { get; set; }
 
         // Propriedades que requerem notificações explícitas com calculos
         private double _antes;
@@ -72,7 +71,22 @@ namespace EngeTerraPlan.ViewModels
         public double VolumeFuro
         {
             get => _volumeFuro;
-            set => SetProperty(ref _volumeFuro, value);
+            set
+            {
+                SetProperty(ref _volumeFuro, value);
+                AtualizarDensidadeSoloUmido();
+            }
+        }
+
+        private double _umidade;
+        public double Umidade
+        {
+            get => _umidade;
+            set
+            {
+                SetProperty(ref _umidade, value);
+                AtualizarDensidadeSoloSeco();
+            }
         }
 
         private double _densidadeAreia;
@@ -133,7 +147,11 @@ namespace EngeTerraPlan.ViewModels
         public double DensidadeSoloUmido
         {
             get => _densidadeSoloUmido;
-            set => SetProperty(ref _densidadeSoloUmido, value);
+            set
+            {
+                SetProperty(ref _densidadeSoloUmido, value);
+                AtualizarDensidadeSoloSeco();
+            }
         }
 
         private double _densidadeSoloSeco;
@@ -173,7 +191,11 @@ namespace EngeTerraPlan.ViewModels
         public double PesoSoloUmido
         {
             get => _pesoDoSoloUmido;
-            set => SetProperty(ref _pesoDoSoloUmido, value);
+            set
+            {
+                SetProperty(ref _pesoDoSoloUmido, value);
+                AtualizarDensidadeSoloUmido();
+            }
         }
 
         private string _registroAmostra;
@@ -370,6 +392,20 @@ namespace EngeTerraPlan.ViewModels
             PesoSoloUmido = CalculationLibrary.CalcularPesoDoSoloUmido(PesoSoloUmidoRec, TaraRecipiente);
         }
 
+        // Método para atualizar automaticamente a DensidadeSoloUmido
+        private void AtualizarDensidadeSoloUmido()
+        {
+            try
+            {
+                DensidadeSoloUmido = CalculationLibrary.CalcularDensidadeSoloUmido(PesoSoloUmido, VolumeFuro);
+            }
+            catch (DivideByZeroException ex)
+            {
+                System.Diagnostics.Debug.WriteLine("Erro de cálculo: " + ex.Message);
+                DensidadeSoloUmido = 0; // Valor padrão em caso de erro
+            }
+        }
+
         // Método para calcular o grau de compactação
         private void AtualizarGrauCompactacao()
         {
@@ -381,6 +417,20 @@ namespace EngeTerraPlan.ViewModels
             catch (DivideByZeroException ex)
             {
                 GrauCompactacao = "Erro: " + ex.Message;
+            }
+        }
+
+        // Método para atualizar automaticamente a DensidadeSoloSeco
+        private void AtualizarDensidadeSoloSeco()
+        {
+            try
+            {
+                DensidadeSoloSeco = CalculationLibrary.CalcularDensidadeSoloSeco(DensidadeSoloUmido, Umidade);
+            }
+            catch (DivideByZeroException ex)
+            {
+                System.Diagnostics.Debug.WriteLine("Erro de cálculo: " + ex.Message);
+                DensidadeSoloSeco = 0; // Valor padrão em caso de erro
             }
         }
     }
