@@ -256,15 +256,16 @@ namespace EngeTerraPlan.ViewModels
 
         // ações
         public Command SalvarCommand { get; }
-
+        public ICommand CalcularCommand { get; }
         // Construtor
         public DensidadeInSituViewModel()
-        {
+        {   
             AvancarParaFormulario2Command = new Command(ExibirFormulario2);
             VoltarParaFormulario1Command = new Command(ExibirFormulario1);
             AvancarParaFormulario3Command = new Command(ExibirFormulario3);
             VoltarParaFormulario2Command = new Command(ExibirFormulario2);
             SalvarCommand = new Command(SalvarDados);
+            CalcularCommand = new Command(AtualizarGrauCompactacao);
         }
 
         // Métodos para alternar visibilidade
@@ -433,5 +434,6 @@ namespace EngeTerraPlan.ViewModels
                 DensidadeSoloSeco = 0; // Valor padrão em caso de erro
             }
         }
+
     }
 }

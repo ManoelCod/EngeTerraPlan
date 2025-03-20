@@ -353,7 +353,7 @@
                TextColor="Blue"
                Margin="10,20,10,0" />
                         <Label Text="{Binding GrauCompactacao}"
-                           FontSize="16"
+                           FontSize="30"
                            TextColor="Green"
                            HorizontalOptions="Center"
                            Margin="0,0,0,20" />

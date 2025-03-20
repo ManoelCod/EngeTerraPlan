@@ -54,7 +54,7 @@
             if (umidadePercentual == 0)
                 throw new DivideByZeroException("A umidade percentual não pode ser zero.");
 
-            return densidadeSoloUmido / (umidadePercentual / 100);
+            return densidadeSoloUmido / (umidadePercentual + 100);
         }
     }
 }
