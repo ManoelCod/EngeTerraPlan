@@ -106,7 +106,7 @@
                                 FontAttributes="Bold"
                                 HeightRequest="50"
                                 CornerRadius="10"
-                                Command="{Binding AvancarCommand}"
+                                Command="{Binding AvancarParaFormulario2Command}"
                                 HorizontalOptions="FillAndExpand"
                                 Margin="0,20,0,0" />
                     </VerticalStackLayout>
@@ -257,7 +257,7 @@
                         <!-- Botões -->
                         <HorizontalStackLayout Spacing="20" HorizontalOptions="Center">
                             <Button Text="Voltar"
-                                    Command="{Binding VoltarCommand}"
+                                    Command="{Binding VoltarParaFormulario1Command}"
                                     BackgroundColor="Gray"
                                     TextColor="White"
                                     FontAttributes="Bold"
@@ -265,13 +265,112 @@
                                     CornerRadius="10" />
 
                             <Button Text="Avançar"
-                                    Command="{Binding SalvarCommand}"
+                                    Command="{Binding AvancarParaFormulario3Command}"
                                     BackgroundColor="Blue"
                                     TextColor="White"
                                     FontAttributes="Bold"
                                     HeightRequest="50"
                                     CornerRadius="10" />
                         </HorizontalStackLayout>
+                    </VerticalStackLayout>
+                </ContentView>
+                <!-- Formulário 3 -->
+                <ContentView IsVisible="{Binding MostrarFormulario3}">
+                    <VerticalStackLayout Padding="20" Spacing="15">
+                        <!-- Título do Formulário -->
+                        <Label Text="Densidade IN-SITU - 3"
+               FontSize="24"
+               TextColor="DarkBlue"
+               FontAttributes="Bold"
+               HorizontalOptions="Center"
+               Margin="0,0,0,20" />
+
+                     
+                        <!-- Campo: Densidade Solo Úmido -->
+                        <HorizontalStackLayout Spacing="10">
+                            <Label Text="Densi. Solo Úmido:"
+                   FontAttributes="Bold"
+                   VerticalOptions="Center"
+                   WidthRequest="140" />
+                            <Entry Text="{Binding DensidadeSoloUmido}"
+                   Placeholder="Digite o valor"
+                   HorizontalOptions="FillAndExpand" />
+                        </HorizontalStackLayout>
+
+                        <!-- Campo: Densidade Solo Seco -->
+                        <HorizontalStackLayout Spacing="10">
+                            <Label Text="Seco:"
+                   FontAttributes="Bold"
+                   VerticalOptions="Center"
+                   WidthRequest="140" />
+                            <Entry Text="{Binding DensidadeSoloSeco}"
+                   Placeholder="Digite o valor"
+                   HorizontalOptions="FillAndExpand" />
+                        </HorizontalStackLayout>
+                        <!-- Seção: Ensaios de Laboratório -->
+                        <Label Text="Ensaios de Laboratório"
+                        FontSize="18"
+                        TextColor="Blue"
+                        FontAttributes="Bold" />
+                        <!-- Campo: Reg. Amostra -->
+                        <HorizontalStackLayout Spacing="10">
+                            <Label Text="Reg. Amostra:"
+                   FontAttributes="Bold"
+                   VerticalOptions="Center"
+                   WidthRequest="140" />
+                            <Entry Text="{Binding RegistroAmostra}"
+                   Placeholder="Digite o valor"
+                   HorizontalOptions="FillAndExpand" />
+                        </HorizontalStackLayout>
+
+                        <!-- Campo: Densidade Máxima -->
+                        <HorizontalStackLayout Spacing="10">
+                            <Label Text="Densi. Máx:"
+                   FontAttributes="Bold"
+                   VerticalOptions="Center"
+                   WidthRequest="140" />
+                            <Entry Text="{Binding DensidadeMaxima}"
+                   Placeholder="Digite o valor"
+                   HorizontalOptions="FillAndExpand" />
+                        </HorizontalStackLayout>
+
+                        <!-- Campo: Umidade Ótima -->
+                        <HorizontalStackLayout Spacing="10">
+                            <Label Text="Umid. Ótima:"
+                   FontAttributes="Bold"
+                   VerticalOptions="Center"
+                   WidthRequest="140" />
+                            <Entry Text="{Binding UmidadeOtima}"
+                   Placeholder="Digite o valor"
+                   HorizontalOptions="FillAndExpand" />
+                        </HorizontalStackLayout>
+
+                        <!-- Grau de Compactação -->
+                        <Label Text="Grau de Compactação:"
+               FontSize="18"
+               FontAttributes="Bold"
+               HorizontalOptions="Center"
+               TextColor="Blue"
+               Margin="10,20,10,0" />
+                        <Label Text="{Binding GrauCompactacao}"
+                           FontSize="16"
+                           TextColor="Green"
+                           HorizontalOptions="Center"
+                           Margin="0,0,0,20" />
+
+                        <!-- Botão Calcular -->
+                        <Button Text="Calcular"
+                Command="{Binding CalcularCommand}"
+                BackgroundColor="Blue"
+                TextColor="White"
+                HorizontalOptions="FillAndExpand" />
+                        <Button Text="Voltar"
+                    Command="{Binding VoltarParaFormulario2Command}"
+                    BackgroundColor="Gray"
+                    TextColor="White"
+                    FontAttributes="Bold"
+                    HeightRequest="50"
+                    CornerRadius="10" />
                     </VerticalStackLayout>
                 </ContentView>
             </VerticalStackLayout>

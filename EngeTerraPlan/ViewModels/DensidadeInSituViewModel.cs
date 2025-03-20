@@ -20,8 +20,8 @@ namespace EngeTerraPlan.ViewModels
         public double PesoSoloUmido { get; set; }
 
         // Propriedades que requerem notificações explícitas
-        private string _data;
-        public string Data
+        private DateTime _data;
+        public DateTime Data
         {
             get => _data;
             set => SetProperty(ref _data, value);
@@ -61,7 +61,48 @@ namespace EngeTerraPlan.ViewModels
             get => _posicaoSelecionada;
             set => SetProperty(ref _posicaoSelecionada, value);
         }
+        // Propriedades para Formulário 3
+        private double _densidadeSoloUmido;
+        public double DensidadeSoloUmido
+        {
+            get => _densidadeSoloUmido;
+            set => SetProperty(ref _densidadeSoloUmido, value);
+        }
 
+        private double _densidadeSoloSeco;
+        public double DensidadeSoloSeco
+        {
+            get => _densidadeSoloSeco;
+            set => SetProperty(ref _densidadeSoloSeco, value);
+        }
+
+        private string _registroAmostra;
+        public string RegistroAmostra
+        {
+            get => _registroAmostra;
+            set => SetProperty(ref _registroAmostra, value);
+        }
+
+        private double _densidadeMaxima;
+        public double DensidadeMaxima
+        {
+            get => _densidadeMaxima;
+            set => SetProperty(ref _densidadeMaxima, value);
+        }
+
+        private double _umidadeOtima;
+        public double UmidadeOtima
+        {
+            get => _umidadeOtima;
+            set => SetProperty(ref _umidadeOtima, value);
+        }
+
+        private string _grauCompactacao;
+        public string GrauCompactacao
+        {
+            get => _grauCompactacao;
+            set => SetProperty(ref _grauCompactacao, value);
+        }
         // Controle de visibilidade dos formulários
         private bool _mostrarFormulario1 = true;
         public bool MostrarFormulario1
@@ -77,34 +118,51 @@ namespace EngeTerraPlan.ViewModels
             set => SetProperty(ref _mostrarFormulario2, value);
         }
 
+        private bool _mostrarFormulario3 = false;
+        public bool MostrarFormulario3
+        {
+            get => _mostrarFormulario3;
+            set => SetProperty(ref _mostrarFormulario3, value);
+        }
+
         // Comandos de navegação
-        public ICommand AvancarCommand { get; }
-        public ICommand VoltarCommand { get; }
-     
+        public ICommand AvancarParaFormulario2Command { get; }
+        public ICommand VoltarParaFormulario1Command { get; }
+        public ICommand AvancarParaFormulario3Command { get; }
+        public ICommand VoltarParaFormulario2Command { get; }
+
         // ações
         public Command SalvarCommand { get; }
 
         // Construtor
         public DensidadeInSituViewModel()
         {
-            AvancarCommand = new Command(ExibirFormulario2);
-            VoltarCommand = new Command(ExibirFormulario1);
+            AvancarParaFormulario2Command = new Command(ExibirFormulario2);
+            VoltarParaFormulario1Command = new Command(ExibirFormulario1);
+            AvancarParaFormulario3Command = new Command(ExibirFormulario3);
+            VoltarParaFormulario2Command = new Command(ExibirFormulario2);
             SalvarCommand = new Command(SalvarDados);
         }
 
         // Métodos para alternar visibilidade
-        private void ExibirFormulario2()
-        {
-            MostrarFormulario1 = false;
-            MostrarFormulario2 = true;
-        }
-
         private void ExibirFormulario1()
         {
             MostrarFormulario1 = true;
             MostrarFormulario2 = false;
+            MostrarFormulario3 = false;
         }
-
+        private void ExibirFormulario2()
+        {
+            MostrarFormulario1 = false;
+            MostrarFormulario2 = true;
+            MostrarFormulario3 = false;
+        }
+        private void ExibirFormulario3()
+        {
+            MostrarFormulario1 = false;
+            MostrarFormulario2 = false;
+            MostrarFormulario3 = true;
+        }
         private void SalvarDados()
         {
             // Criar o modelo com os dados do formulário

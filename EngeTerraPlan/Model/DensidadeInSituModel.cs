@@ -7,7 +7,7 @@ namespace EngeTerraPlan.Models
         [PrimaryKey, AutoIncrement]
         public int Id { get; set; }
 
-        public string Data { get; set; }
+        public DateTime Data { get; set; }
         public string Estaca { get; set; }
         public string Camada { get; set; }
         public double ProfundidadeFuro { get; set; }
