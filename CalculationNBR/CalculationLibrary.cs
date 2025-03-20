@@ -23,5 +23,17 @@
 
             return pesoSoloUmido / volumeFuro;
         }
+        public static double CalcularPesoDaAreiaDoFuro(double diferenca, double pesoFunil)
+        {
+            return diferenca - pesoFunil;
+        }
+
+        public static double CalcularVolumeFuro(double pesoFuro, double densidadeAreia)
+        {
+            if (densidadeAreia == 0)
+                throw new DivideByZeroException("A densidade da areia não pode ser zero.");
+
+            return pesoFuro / densidadeAreia;
+        }
     }
 }

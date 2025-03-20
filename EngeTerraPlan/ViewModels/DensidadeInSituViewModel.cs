@@ -9,15 +9,11 @@ namespace EngeTerraPlan.ViewModels
     public class DensidadeInSituViewModel : BaseViewModel
     {
         // Propriedades para bindings simples (não precisam de SetProperty)
-        public double PesoFunil { get; set; }
-        public double PesoFuro { get; set; }
-        public double DensidadeAreia { get; set; }
-        public double VolumeFuro { get; set; }
         public double Umidade { get; set; }
         public double TaraRecipiente { get; set; }
         public double PesoSoloUmido { get; set; }
 
-        // Propriedades que requerem notificações explícitas
+        // Propriedades que requerem notificações explícitas com calculos
         private double _antes;
         public double Antes
         {
@@ -41,11 +37,55 @@ namespace EngeTerraPlan.ViewModels
         }
 
 
+        private double _pesoFunil;
+        public double PesoFunil
+        {
+            get => _pesoFunil;
+            set
+            {
+                SetProperty(ref _pesoFunil, value);
+                AtualizarPesoDaAreiaDoFuro();
+            }
+        }
+
         private double _diferenca;
         public double Diferenca
         {
             get => _diferenca;
-            set => SetProperty(ref _diferenca, value);
+            set
+            {
+                SetProperty(ref _diferenca, value);
+                AtualizarPesoDaAreiaDoFuro();
+            }
+        }
+
+        private double _pesoFuro;
+        public double PesoFuro
+        {
+            get => _pesoFuro;
+            set
+            {
+                SetProperty(ref _pesoFuro, value);
+                AtualizarVolumeFuro();
+            }
+        }
+
+        private double _volumeFuro;
+        public double VolumeFuro
+        {
+            get => _volumeFuro;
+            set => SetProperty(ref _volumeFuro, value);
+        }
+
+        private double _densidadeAreia;
+        public double DensidadeAreia
+        {
+            get => _densidadeAreia;
+            set
+            {
+                SetProperty(ref _densidadeAreia, value);
+                AtualizarVolumeFuro();
+            }
         }
 
         private DateTime _data;
@@ -275,6 +315,25 @@ namespace EngeTerraPlan.ViewModels
         private void AtualizarDiferenca()
         {
             Diferenca = CalculationLibrary.CalcularDiferenca(Antes, Depois);
+        }
+
+        // Método para atualizar automaticamente o PesoDaAreiaDoFuro
+        private void AtualizarPesoDaAreiaDoFuro()
+        {
+            PesoFuro = CalculationLibrary.CalcularPesoDaAreiaDoFuro(Diferenca, PesoFunil);
+        }
+        // Método para atualizar automaticamente o VolumeFuro
+        private void AtualizarVolumeFuro()
+        {
+            try
+            {
+                VolumeFuro = CalculationLibrary.CalcularVolumeFuro(PesoFuro, DensidadeAreia);
+            }
+            catch (DivideByZeroException ex)
+            {
+                System.Diagnostics.Debug.WriteLine("Erro de cálculo: " + ex.Message);
+                VolumeFuro = 0; // Valor padrão em caso de erro
+            }
         }
 
         // Método para calcular o grau de compactação
