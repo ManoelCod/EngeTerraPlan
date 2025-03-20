@@ -265,7 +265,7 @@
                                     CornerRadius="10" />
 
                             <Button Text="Avançar"
-                                    Command="{Binding FinalizarCommand}"
+                                    Command="{Binding SalvarCommand}"
                                     BackgroundColor="Blue"
                                     TextColor="White"
                                     FontAttributes="Bold"
