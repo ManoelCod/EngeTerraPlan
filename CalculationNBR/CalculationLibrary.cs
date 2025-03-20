@@ -33,7 +33,14 @@
             if (densidadeAreia == 0)
                 throw new DivideByZeroException("A densidade da areia não pode ser zero.");
 
-            return pesoFuro / densidadeAreia;
+            double volumeFuro = pesoFuro / densidadeAreia;
+            return Math.Round(volumeFuro, 4); // Arredondar para 4 casas decimais
         }
+
+        public static double CalcularPesoDoSoloUmido(double pesoSoloUmidoRec, double taraRecipiente)
+        {
+            return pesoSoloUmidoRec - taraRecipiente;
+        }
+
     }
 }

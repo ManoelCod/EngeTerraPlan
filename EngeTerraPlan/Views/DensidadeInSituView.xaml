@@ -244,13 +244,13 @@
 
                         <!-- Campo P. Solo Úmido -->
                         <HorizontalStackLayout Spacing="10">
-                            <Label Text="P. Solo Úmido (g):"
+                            <Label Text="P. Solo Úmido + REC (g):"
                                    FontAttributes="Bold"
                                    VerticalOptions="Center"
                                    WidthRequest="150" />
                             <Entry Placeholder="Digite o valor"
                                    Keyboard="Numeric"
-                                   Text="{Binding PesoSoloUmido}"
+                                   Text="{Binding PesoSoloUmidoRec}"
                                    HorizontalOptions="FillAndExpand" />
                         </HorizontalStackLayout>
 

@@ -10,8 +10,6 @@ namespace EngeTerraPlan.ViewModels
     {
         // Propriedades para bindings simples (não precisam de SetProperty)
         public double Umidade { get; set; }
-        public double TaraRecipiente { get; set; }
-        public double PesoSoloUmido { get; set; }
 
         // Propriedades que requerem notificações explícitas com calculos
         private double _antes;
@@ -149,6 +147,35 @@ namespace EngeTerraPlan.ViewModels
             }
         }
 
+        private double _pesoSoloUmidoRec;
+        public double PesoSoloUmidoRec
+        {
+            get => _pesoSoloUmidoRec;
+            set
+            {
+                SetProperty(ref _pesoSoloUmidoRec, value);
+                AtualizarPesoDoSoloUmido();
+            }
+        }
+
+        private double _taraRecipiente;
+        public double TaraRecipiente
+        {
+            get => _taraRecipiente;
+            set
+            {
+                SetProperty(ref _taraRecipiente, value);
+                AtualizarPesoDoSoloUmido();
+            }
+        }
+
+        private double _pesoDoSoloUmido;
+        public double PesoSoloUmido
+        {
+            get => _pesoDoSoloUmido;
+            set => SetProperty(ref _pesoDoSoloUmido, value);
+        }
+
         private string _registroAmostra;
         public string RegistroAmostra
         {
@@ -261,6 +288,7 @@ namespace EngeTerraPlan.ViewModels
                 Umidade = this.Umidade,
                 TaraRecipiente = this.TaraRecipiente,
                 PesoSoloUmido = this.PesoSoloUmido,
+                PesoSoloUmidoRec = this.PesoSoloUmidoRec,
                 DensidadeSoloUmido = this.DensidadeSoloUmido,
                 DensidadeSoloSeco = this.DensidadeSoloSeco,
                 RegistroAmostra = this.RegistroAmostra,
@@ -334,6 +362,12 @@ namespace EngeTerraPlan.ViewModels
                 System.Diagnostics.Debug.WriteLine("Erro de cálculo: " + ex.Message);
                 VolumeFuro = 0; // Valor padrão em caso de erro
             }
+        }
+
+        // Método para atualizar automaticamente o PesoDoSoloUmido
+        private void AtualizarPesoDoSoloUmido()
+        {
+            PesoSoloUmido = CalculationLibrary.CalcularPesoDoSoloUmido(PesoSoloUmidoRec, TaraRecipiente);
         }
 
         // Método para calcular o grau de compactação
