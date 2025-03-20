@@ -124,19 +124,154 @@
                                Margin="0,0,0,20" />
 
                         <!-- Adicione outros campos aqui -->
-                        <Label Text="Aqui estão os campos do segundo formulário."
-                               HorizontalOptions="Center" />
+                        <!-- Campo Antes -->
+                        <HorizontalStackLayout Spacing="20" VerticalOptions="Center">
+                            <!-- Campo Antes -->
+                            <VerticalStackLayout Spacing="5">
+                                <Label Text="Antes (g):"
+                   FontAttributes="Bold"
+                   HorizontalOptions="Center" />
+                                <Entry Placeholder="Digite o valor"
+                   Keyboard="Numeric"
+                   BackgroundColor="#f0f4ff"
+                   TextColor="Black"
+                   FontAttributes="Bold"
+                   HeightRequest="50"
+                   WidthRequest="150"
+                   Text="{Binding Antes}" />
+                            </VerticalStackLayout>
 
-                        <!-- Botão Voltar -->
-                        <Button Text="Voltar"
-                                BackgroundColor="Gray"
-                                TextColor="White"
-                                FontAttributes="Bold"
-                                HeightRequest="50"
-                                CornerRadius="10"
-                                Command="{Binding VoltarCommand}"
-                                HorizontalOptions="FillAndExpand"
-                                Margin="0,20,0,0" />
+                            <!-- Campo Depois -->
+                            <VerticalStackLayout Spacing="5">
+                                <Label Text="Depois (g):"
+               FontAttributes="Bold"
+               HorizontalOptions="Center" />
+                                <Entry Placeholder="Digite o valor"
+               Keyboard="Numeric"
+               BackgroundColor="#f0f4ff"
+               TextColor="Black"
+               FontAttributes="Bold"
+               HeightRequest="50"
+               WidthRequest="150"
+               Text="{Binding Depois}" />
+                            </VerticalStackLayout>
+                        </HorizontalStackLayout>
+
+
+                        <!-- Campo Diferença -->
+                        <HorizontalStackLayout Spacing="10">
+                            <Label Text="Diferença (g):"
+                                   FontAttributes="Bold"
+                                   VerticalOptions="Center"
+                                   WidthRequest="150" />
+                            <Entry Placeholder="Digite o valor"
+                                   Keyboard="Numeric"
+                                   Text="{Binding Diferenca}"
+                                   HorizontalOptions="FillAndExpand" />
+                        </HorizontalStackLayout>
+
+                        <!-- Campo P. Fúnil -->
+                        <HorizontalStackLayout Spacing="10">
+                            <Label Text="P. Fúnil (g):"
+                                   FontAttributes="Bold"
+                                   VerticalOptions="Center"
+                                   WidthRequest="150" />
+                            <Entry Placeholder="Digite o valor"
+                                   Keyboard="Numeric"
+                                   Text="{Binding PesoFunil}"
+                                   HorizontalOptions="FillAndExpand" />
+                        </HorizontalStackLayout>
+
+                        <!-- Campo P. Furo -->
+                        <HorizontalStackLayout Spacing="10">
+                            <Label Text="P. Furo (g):"
+                                   FontAttributes="Bold"
+                                   VerticalOptions="Center"
+                                   WidthRequest="150" />
+                            <Entry Placeholder="Digite o valor"
+                                   Keyboard="Numeric"
+                                   Text="{Binding PesoFuro}"
+                                   HorizontalOptions="FillAndExpand" />
+                        </HorizontalStackLayout>
+
+                        <!-- Campo D. AREIA -->
+                        <HorizontalStackLayout Spacing="10">
+                            <Label Text="D. AREIA (g/cm³):"
+                                   FontAttributes="Bold"
+                                   VerticalOptions="Center"
+                                   WidthRequest="150" />
+                            <Entry Placeholder="Digite a densidade"
+                                   Keyboard="Numeric"
+                                   Text="{Binding DensidadeAreia}"
+                                   HorizontalOptions="FillAndExpand" />
+                        </HorizontalStackLayout>
+
+                        <!-- Campo Volume Furo -->
+                        <HorizontalStackLayout Spacing="10">
+                            <Label Text="Volume Furo (cm³):"
+                                   FontAttributes="Bold"
+                                   VerticalOptions="Center"
+                                   WidthRequest="150" />
+                            <Entry Placeholder="Digite o volume"
+                                   Keyboard="Numeric"
+                                   Text="{Binding VolumeFuro}"
+                                   HorizontalOptions="FillAndExpand" />
+                        </HorizontalStackLayout>
+
+                        <!-- Campo Umidade -->
+                        <HorizontalStackLayout Spacing="10">
+                            <Label Text="Umidade (%):"
+                                   FontAttributes="Bold"
+                                   VerticalOptions="Center"
+                                   WidthRequest="150" />
+                            <Entry Placeholder="Digite a umidade"
+                                   Keyboard="Numeric"
+                                   Text="{Binding Umidade}"
+                                   HorizontalOptions="FillAndExpand" />
+                        </HorizontalStackLayout>
+
+                        <!-- Campo Tara Recipiente -->
+                        <HorizontalStackLayout Spacing="10">
+                            <Label Text="T. Recipiente (g):"
+                                   FontAttributes="Bold"
+                                   VerticalOptions="Center"
+                                   WidthRequest="150" />
+                            <Entry Placeholder="Digite o valor"
+                                   Keyboard="Numeric"
+                                   Text="{Binding TaraRecipiente}"
+                                   HorizontalOptions="FillAndExpand" />
+                        </HorizontalStackLayout>
+
+                        <!-- Campo P. Solo Úmido -->
+                        <HorizontalStackLayout Spacing="10">
+                            <Label Text="P. Solo Úmido (g):"
+                                   FontAttributes="Bold"
+                                   VerticalOptions="Center"
+                                   WidthRequest="150" />
+                            <Entry Placeholder="Digite o valor"
+                                   Keyboard="Numeric"
+                                   Text="{Binding PesoSoloUmido}"
+                                   HorizontalOptions="FillAndExpand" />
+                        </HorizontalStackLayout>
+
+                        <!-- Botões -->
+                        <HorizontalStackLayout Spacing="20" HorizontalOptions="Center">
+                            <Button Text="Voltar"
+                                    Command="{Binding VoltarCommand}"
+                                    BackgroundColor="Gray"
+                                    TextColor="White"
+                                    FontAttributes="Bold"
+                                    HeightRequest="50"
+                                    CornerRadius="10" />
+
+                            <Button Text="Avançar"
+                                    Command="{Binding FinalizarCommand}"
+                                    BackgroundColor="Blue"
+                                    TextColor="White"
+                                    FontAttributes="Bold"
+                                    HeightRequest="50"
+                                    CornerRadius="10" />
+                        </HorizontalStackLayout>
                     </VerticalStackLayout>
                 </ContentView>
             </VerticalStackLayout>

@@ -1,56 +1,66 @@
-﻿using System;
-using System.Windows.Input;
+﻿using System.Windows.Input;
 using Microsoft.Maui.Controls;
 
 namespace EngeTerraPlan.ViewModels
 {
     public class DensidadeInSituViewModel : BaseViewModel
     {
-        private string _data;
-        private string _estaca;
-        private string _camada;
-        private string _profundidadeFuro;
-        private string _espessuraCamada;
-        private string _posicaoSelecionada;
+        // Propriedades para bindings simples (não precisam de SetProperty)
+        public double Antes { get; set; }
+        public double Depois { get; set; }
+        public double Diferenca { get; set; }
+        public double PesoFunil { get; set; }
+        public double PesoFuro { get; set; }
+        public double DensidadeAreia { get; set; }
+        public double VolumeFuro { get; set; }
+        public double Umidade { get; set; }
+        public double TaraRecipiente { get; set; }
+        public double PesoSoloUmido { get; set; }
 
-        // Propriedades com notificações de mudança (Binding)
+        // Propriedades que requerem notificações explícitas
+        private string _data;
         public string Data
         {
             get => _data;
             set => SetProperty(ref _data, value);
         }
 
+        private string _estaca;
         public string Estaca
         {
             get => _estaca;
             set => SetProperty(ref _estaca, value);
         }
 
+        private string _camada;
         public string Camada
         {
             get => _camada;
             set => SetProperty(ref _camada, value);
         }
 
+        private string _profundidadeFuro;
         public string ProfundidadeFuro
         {
             get => _profundidadeFuro;
             set => SetProperty(ref _profundidadeFuro, value);
         }
 
+        private string _espessuraCamada;
         public string EspessuraCamada
         {
             get => _espessuraCamada;
             set => SetProperty(ref _espessuraCamada, value);
         }
+
+        private string _posicaoSelecionada;
         public string PosicaoSelecionada
         {
             get => _posicaoSelecionada;
             set => SetProperty(ref _posicaoSelecionada, value);
         }
 
-        // comandos para alternar formulario
-
+        // Controle de visibilidade dos formulários
         private bool _mostrarFormulario1 = true;
         public bool MostrarFormulario1
         {
@@ -65,9 +75,9 @@ namespace EngeTerraPlan.ViewModels
             set => SetProperty(ref _mostrarFormulario2, value);
         }
 
-        // Comando para o botão "Avançar e voltar"
-        public Command AvancarCommand { get; }
-        public Command VoltarCommand { get; }
+        // Comandos de navegação
+        public ICommand AvancarCommand { get; }
+        public ICommand VoltarCommand { get; }
 
         // Construtor
         public DensidadeInSituViewModel()
@@ -76,6 +86,7 @@ namespace EngeTerraPlan.ViewModels
             VoltarCommand = new Command(ExibirFormulario1);
         }
 
+        // Métodos para alternar visibilidade
         private void ExibirFormulario2()
         {
             MostrarFormulario1 = false;
@@ -86,22 +97,6 @@ namespace EngeTerraPlan.ViewModels
         {
             MostrarFormulario1 = true;
             MostrarFormulario2 = false;
-        }
-
-        // Função executada ao pressionar o botão "Avançar"
-        private void ExecutarAvancar()
-        {
-            if (string.IsNullOrWhiteSpace(Data) ||
-                string.IsNullOrWhiteSpace(Estaca) ||
-                string.IsNullOrWhiteSpace(Camada))
-            {
-                // Exemplo de validação
-                App.Current.MainPage.DisplayAlert("Erro", "Preencha todos os campos obrigatórios.", "OK");
-                return;
-            }
-
-            // Simular navegação ou lógica de processamento
-            App.Current.MainPage.DisplayAlert("Sucesso", "Dados enviados com sucesso!", "OK");
         }
     }
 }
