@@ -100,7 +100,7 @@ namespace EngeTerraPlan.ViewModels
             }
         }
 
-        private DateTime _data;
+        private DateTime _data = DateTime.Now; // Inicializa com a data atual
         public DateTime Data
         {
             get => _data;
