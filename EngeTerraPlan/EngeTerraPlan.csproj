@@ -12,6 +12,10 @@
 		either BOTH runtimes must be indicated or ONLY macatalyst-x64. -->
 		<!-- For example: <RuntimeIdentifiers>maccatalyst-x64;maccatalyst-arm64</RuntimeIdentifiers> -->
 		<TargetFrameworks>net9.0-android;</TargetFrameworks>
+		<AndroidSupportedAbis>armeabi-v7a</AndroidSupportedAbis>
+		<RuntimeIdentifiers>android-arm;android-arm64;android-x86;android-x64</RuntimeIdentifiers>
+
+		<SupportedOSPlatformVersion>28.0</SupportedOSPlatformVersion>
 		<OutputType>Exe</OutputType>
 		<RootNamespace>EngeTerraPlan</RootNamespace>
 		<UseMaui>true</UseMaui>
@@ -40,6 +44,26 @@
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</SupportedOSPlatformVersion>
 		<TargetPlatformMinVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</TargetPlatformMinVersion>
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'tizen'">6.5</SupportedOSPlatformVersion>
+		<AndroidSigningKeyStore>EngeTerraPlanTest.keystore</AndroidSigningKeyStore>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net9.0-android|AnyCPU'">
+	  <DebugType>none</DebugType>
+	  <TrimMode>link</TrimMode>
+	  <AndroidKeyStore>True</AndroidKeyStore>
+	  <AndroidSigningStorePass>010101</AndroidSigningStorePass>
+	  <AndroidSigningKeyAlias>EngeTerraPlanTest</AndroidSigningKeyAlias>
+	  <AndroidSigningKeyPass>010101</AndroidSigningKeyPass>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net9.0-android|AnyCPU'">
+	  <DebugType>none</DebugType>
+	  <AndroidPackageFormat>apk</AndroidPackageFormat>
+	  <TrimMode>link</TrimMode>
+	  <AndroidKeyStore>True</AndroidKeyStore>
+	  <AndroidSigningStorePass>010101</AndroidSigningStorePass>
+	  <AndroidSigningKeyAlias>EngeTerraPlanTest</AndroidSigningKeyAlias>
+	  <AndroidSigningKeyPass>010101</AndroidSigningKeyPass>
 	</PropertyGroup>
 
 	<ItemGroup>
