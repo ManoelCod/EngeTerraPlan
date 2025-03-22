@@ -248,6 +248,13 @@ namespace EngeTerraPlan.ViewModels
             set => SetProperty(ref _mostrarFormulario3, value);
         }
 
+        private bool _podeSalvar;
+        public bool PodeSalvar
+        {
+            get => _podeSalvar;
+            set => SetProperty(ref _podeSalvar, value);
+        }
+
         // Comandos de navegação
         public ICommand AvancarParaFormulario2Command { get; }
         public ICommand VoltarParaFormulario1Command { get; }
@@ -255,7 +262,7 @@ namespace EngeTerraPlan.ViewModels
         public ICommand VoltarParaFormulario2Command { get; }
 
         // ações
-        public Command SalvarCommand { get; }
+        public ICommand SalvarCommand { get; }
         public ICommand CalcularCommand { get; }
         // Construtor
         public DensidadeInSituViewModel()
@@ -293,6 +300,13 @@ namespace EngeTerraPlan.ViewModels
         private void SalvarDados()
         {
             // Criar o modelo com os dados do formulário
+            ValidarPodeSalvar();
+
+            if (!PodeSalvar)
+            {
+                return;
+            }
+
             var novoCadastro = new DensidadeInSituModel
             {
                 Data = this.Data,
@@ -432,6 +446,46 @@ namespace EngeTerraPlan.ViewModels
             {
                 System.Diagnostics.Debug.WriteLine("Erro de cálculo: " + ex.Message);
                 DensidadeSoloSeco = 0; // Valor padrão em caso de erro
+            }
+        }
+
+        private void ValidarPodeSalvar()
+        {
+            var mensagensErro = new List<string>
+            {
+                string.IsNullOrWhiteSpace(Estaca) ? "Estaca" : null,
+                string.IsNullOrWhiteSpace(Camada) ? "Camada" : null,
+                string.IsNullOrWhiteSpace(ProfundidadeFuro) ? "Profundidade do Furo" : null,
+                string.IsNullOrWhiteSpace(EspessuraCamada) ? "Espessura da Camada" : null,
+                string.IsNullOrWhiteSpace(PosicaoSelecionada) ? "Posição" : null,
+                Antes == 0 ? "Antes" : null,
+                Depois == 0 ? "Depois" : null,
+                Diferenca == 0 ? "Diferença" : null,
+                PesoFunil == 0 ? "Peso do Funil" : null,
+                PesoFuro == 0 ? "Peso do Furo" : null,
+                DensidadeAreia == 0 ? "Densidade da Areia" : null,
+                VolumeFuro == 0 ? "Volume do Furo" : null,
+                Umidade == 0 ? "Umidade" : null,
+                TaraRecipiente == 0 ? "Tara do Recipiente" : null,
+                PesoSoloUmido == 0 ? "Peso do Solo Úmido" : null,
+                PesoSoloUmidoRec == 0 ? "Peso do Solo Úmido + Recipiente" : null,
+                DensidadeSoloUmido == 0 ? "Densidade do Solo Úmido" : null,
+                DensidadeSoloSeco == 0 ? "Densidade do Solo Seco" : null,
+                string.IsNullOrWhiteSpace(RegistroAmostra) ? "Registro da Amostra" : null,
+                DensidadeMaxima == 0 ? "Densidade Máxima" : null,
+                UmidadeOtima == 0 ? "Umidade Ótima" : null,
+                string.IsNullOrWhiteSpace(GrauCompactacao) ? "Grau de Compactação" : null
+            }.Where(x => x != null).ToList();
+
+            if (mensagensErro.Any())
+            {
+                var mensagem = "Os seguintes campos são obrigatórios e não foram preenchidos:\n" + string.Join("\n", mensagensErro);
+                App.Current.MainPage.DisplayAlert("Erro", mensagem, "OK");
+                PodeSalvar = false;
+            }
+            else
+            {
+                PodeSalvar = true;
             }
         }
 
