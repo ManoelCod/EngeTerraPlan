@@ -1,8 +1,16 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:vm="clr-namespace:EngeTerraPlan.ViewModels"
+             xmlns:conv="clr-namespace:EngeTerraPlan.Ultils"
              x:Class="EngeTerraPlan.Views.DensidadeInSituView"
              Title="Densidade IN-SITU">
+
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <conv:RadioButtonConverter x:Key="RadioButtonConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
 
     <!-- Configurar o BindingContext -->
     <ContentPage.BindingContext>
@@ -89,13 +97,13 @@
                             <HorizontalStackLayout Spacing="20" HorizontalOptions="Center">
                                 <RadioButton Content="Esquerda"
                                              GroupName="Posicao"
-                                             IsChecked="{Binding PosicaoEsquerda}" />
+                                             IsChecked="{Binding PosicaoSelecionada, Converter={StaticResource RadioButtonConverter}, ConverterParameter=Esquerda}" />
                                 <RadioButton Content="Centro"
                                              GroupName="Posicao"
-                                             IsChecked="{Binding PosicaoCentro}" />
+                                             IsChecked="{Binding PosicaoSelecionada, Converter={StaticResource RadioButtonConverter}, ConverterParameter=Centro}" />
                                 <RadioButton Content="Direita"
                                              GroupName="Posicao"
-                                             IsChecked="{Binding PosicaoDireita}" />
+                                             IsChecked="{Binding PosicaoSelecionada, Converter={StaticResource RadioButtonConverter}, ConverterParameter=Direita}" />
                             </HorizontalStackLayout>
                         </VerticalStackLayout>
 
