@@ -9,7 +9,7 @@
 
     <ShellContent
     Title="Densidade In Situ"
-    ContentTemplate="{DataTemplate local:DensidadeInSituView}"
+    ContentTemplate="{DataTemplate local:DensidadeInSituListView}"
     Route="DensidadeInSituView" />
 
 </Shell>

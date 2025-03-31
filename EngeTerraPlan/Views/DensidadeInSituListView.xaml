@@ -1,0 +1,119 @@
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="EngeTerraPlan.Views.DensidadeInSituListView"
+             Title="Densidade In-Situ">
+    <Grid Padding="20" RowSpacing="15">
+        <!-- Definindo as linhas da tela: um para o título e outro para o ListView -->
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <!-- Título da página -->
+        <Label Text="Lista de Densidade In-Situ"
+           FontSize="26"
+           FontAttributes="Bold"
+           HorizontalOptions="Center"
+           VerticalOptions="Center"
+           Grid.Row="0"
+           Margin="0,10,0,15"
+           TextColor="#004aad" />
+
+        <!-- ListView para exibir os itens -->
+        <ListView x:Name="DensidadeListView"
+              Grid.Row="1"
+              ItemsSource="{Binding DensidadeItems}"
+              SeparatorVisibility="Default"
+              SeparatorColor="#cccccc"
+              VerticalOptions="FillAndExpand"
+              HasUnevenRows="True">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <!-- Card do item com contorno, preenchimento e sombra -->
+                        <Frame BorderColor="#cccccc"
+                   CornerRadius="15"
+                   Padding="20"
+                   Margin="10"
+                   BackgroundColor="White"
+                   HasShadow="True">
+                            <StackLayout Spacing="10">
+                                <!-- Cabeçalho: Código -->
+                                <Label>
+                                    <Label.FormattedText>
+                                        <FormattedString>
+                                            <Span Text="Código#: " TextColor="Black" FontSize="16" FontAttributes="Bold"/>
+                                            <Span Text="{Binding Codigo}" TextColor="Blue" FontSize="18" FontAttributes="Bold"/>
+                                        </FormattedString>
+                                    </Label.FormattedText>
+                                </Label>
+
+                                <!-- Grid com duas linhas e duas colunas para os atributos Data, Cliente, Obra, e Estaca/Local -->
+                                <Grid ColumnSpacing="10" RowSpacing="5">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <!-- Data -->
+                                    <Label Grid.Row="0" Grid.Column="0">
+                                        <Label.FormattedText>
+                                            <FormattedString>
+                                                <Span Text="Data: " TextColor="Black" FontSize="14"/>
+                                                <Span Text="{Binding Data}" TextColor="Blue" FontSize="16"/>
+                                            </FormattedString>
+                                        </Label.FormattedText>
+                                    </Label>
+
+                                    <!-- Cliente -->
+                                    <Label Grid.Row="0" Grid.Column="1">
+                                        <Label.FormattedText>
+                                            <FormattedString>
+                                                <Span Text="Cliente: " TextColor="Black" FontSize="14"/>
+                                                <Span Text="{Binding Cliente}" TextColor="Blue" FontSize="16"/>
+                                            </FormattedString>
+                                        </Label.FormattedText>
+                                    </Label>
+
+                                    <!-- Obra -->
+                                    <Label Grid.Row="1" Grid.Column="0">
+                                        <Label.FormattedText>
+                                            <FormattedString>
+                                                <Span Text="Obra: " TextColor="Black" FontSize="14"/>
+                                                <Span Text="{Binding Obra}" TextColor="Blue" FontSize="16"/>
+                                            </FormattedString>
+                                        </Label.FormattedText>
+                                    </Label>
+
+                                    <!-- Estaca/Local -->
+                                    <Label Grid.Row="1" Grid.Column="1">
+                                        <Label.FormattedText>
+                                            <FormattedString>
+                                                <Span Text="Estaca/Local: " TextColor="Black" FontSize="14"/>
+                                                <Span Text="{Binding EstacaLocal}" TextColor="Blue" FontSize="16"/>
+                                            </FormattedString>
+                                        </Label.FormattedText>
+                                    </Label>
+                                </Grid>
+
+                                <!-- Grau Compactação: valor em verde, centralizado e com tamanho diferenciado -->
+                                <Label HorizontalOptions="Center">
+                                    <Label.FormattedText>
+                                        <FormattedString>
+                                            <Span Text="Grau Compactação: " TextColor="Black" FontSize="14"/>
+                                            <Span Text="{Binding GrauCompactacao}" TextColor="Green" FontSize="18" FontAttributes="Bold"/>
+                                        </FormattedString>
+                                    </Label.FormattedText>
+                                </Label>
+                            </StackLayout>
+                        </Frame>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </Grid>
+</ContentPage>
