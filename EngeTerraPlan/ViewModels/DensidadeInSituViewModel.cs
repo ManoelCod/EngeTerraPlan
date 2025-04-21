@@ -1,4 +1,5 @@
-﻿using System.Windows.Input;
+﻿using System.Collections.ObjectModel;
+using System.Windows.Input;
 using CalculationNBR;
 using EngeTerraPlan.Data;
 using EngeTerraPlan.Models;
@@ -297,7 +298,7 @@ namespace EngeTerraPlan.ViewModels
             MostrarFormulario3 = true;
         }
 
-        private void SalvarDados()
+        private async void SalvarDados()
         {
             // Criar o modelo com os dados do formulário
             ValidarPodeSalvar();
@@ -368,6 +369,10 @@ namespace EngeTerraPlan.ViewModels
 
             // Exibir mensagem de sucesso
             App.Current.MainPage.DisplayAlert("Sucesso", "Cadastro salvo com sucesso!", "OK");
+
+            // Navegar de volta para a lista e atualizar os itens
+            await Shell.Current.GoToAsync("///DensidadeInSituListView");
+            MessagingCenter.Send(this, "RefreshDensidadeItems");
         }
 
         public List<DensidadeInSituModel> ObterTodosOsRegistros()

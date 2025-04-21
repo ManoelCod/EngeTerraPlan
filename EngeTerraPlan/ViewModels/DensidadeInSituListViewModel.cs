@@ -16,12 +16,14 @@ namespace EngeTerraPlan.ViewModels
         public ObservableCollection<DensidadeInSituModel> DensidadeItems { get; set; }
         public ICommand LoadItemsCommand { get; }
         public ICommand CreateDensidadeCommand { get; }
+        public ICommand RefreshItemsCommand { get; }
 
         public DensidadeInSituListViewModel()
         {
             DensidadeItems = new ObservableCollection<DensidadeInSituModel>();
             LoadItemsCommand = new Command(async () => await ExecuteLoadItemsCommand());
             CreateDensidadeCommand = new Command(async () => await ExecuteCreateDensidadeCommand());
+            RefreshItemsCommand = new Command(async () => await ExecuteRefreshItemsCommand());
         }
 
         private async Task ExecuteLoadItemsCommand()
@@ -43,13 +45,18 @@ namespace EngeTerraPlan.ViewModels
             }
             finally
             {
-                IsBusy = false;
+                IsBusy = false; // Change IsBusy to false after loading items
             }
         }
 
         private async Task ExecuteCreateDensidadeCommand()
         {
             await Shell.Current.GoToAsync("///DensidadeInSituView");
+        }
+
+        private async Task ExecuteRefreshItemsCommand()
+        {
+            await ExecuteLoadItemsCommand();
         }
     }
 }

@@ -8,8 +8,13 @@
     Title="EngeTerraPlan">
 
     <ShellContent
-    Title="Densidade In Situ"
-    ContentTemplate="{DataTemplate local:DensidadeInSituListView}"
-    Route="DensidadeInSituView" />
+        Title="Densidade In Situ"
+        ContentTemplate="{DataTemplate local:DensidadeInSituListView}"
+        Route="DensidadeInSituListView" />
+
+    <ShellContent
+        Title="Cadastrar Densidade In Situ"
+        ContentTemplate="{DataTemplate local:DensidadeInSituView}"
+        Route="DensidadeInSituView" />
 
 </Shell>
