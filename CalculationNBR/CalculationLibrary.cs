@@ -9,10 +9,11 @@
 
         public static double CalcularCompactacao(double densidadeSeca, double densidadeMaxima)
         {
-            if (densidadeMaxima == 0)
-                throw new DivideByZeroException("A densidade máxima não pode ser zero.");
+            //if (densidadeMaxima == 0)
+            //    throw new DivideByZeroException("A densidade máxima não pode ser zero.");
 
-            return (densidadeSeca / densidadeMaxima) * 100;
+            //return (densidadeSeca / densidadeMaxima) * 100;
+            return 0;
         }
 
         // Outros métodos podem ser adicionados aqui, por exemplo:

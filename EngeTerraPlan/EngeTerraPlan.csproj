@@ -45,25 +45,39 @@
 		<TargetPlatformMinVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</TargetPlatformMinVersion>
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'tizen'">6.5</SupportedOSPlatformVersion>
 		<AndroidSigningKeyStore>EngeTerraPlanTest.keystore</AndroidSigningKeyStore>
+		<PlatformTarget>AnyCPU</PlatformTarget>
+		<RunAnalyzersDuringBuild>False</RunAnalyzersDuringBuild>
+		<RunAnalyzersDuringLiveAnalysis>False</RunAnalyzersDuringLiveAnalysis>
+		<EnableNETAnalyzers>False</EnableNETAnalyzers>
+		<NuGetAudit>True</NuGetAudit>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net9.0-android|AnyCPU'">
-	  <DebugType>none</DebugType>
-	  <TrimMode>link</TrimMode>
-	  <AndroidKeyStore>True</AndroidKeyStore>
+	  <DebugType>portable</DebugType>
+	  <AndroidKeyStore>False</AndroidKeyStore>
 	  <AndroidSigningStorePass>010101</AndroidSigningStorePass>
 	  <AndroidSigningKeyAlias>EngeTerraPlanTest</AndroidSigningKeyAlias>
 	  <AndroidSigningKeyPass>010101</AndroidSigningKeyPass>
+	  <AndroidUseAapt2>True</AndroidUseAapt2>
+	  <AndroidCreatePackagePerAbi>False</AndroidCreatePackagePerAbi>
+	  <AndroidPackageFormat>apk</AndroidPackageFormat>
+	  <PublishTrimmed>false</PublishTrimmed>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net9.0-android|AnyCPU'">
-	  <DebugType>none</DebugType>
 	  <AndroidPackageFormat>apk</AndroidPackageFormat>
 	  <TrimMode>link</TrimMode>
-	  <AndroidKeyStore>True</AndroidKeyStore>
+	  <AndroidKeyStore>False</AndroidKeyStore>
 	  <AndroidSigningStorePass>010101</AndroidSigningStorePass>
 	  <AndroidSigningKeyAlias>EngeTerraPlanTest</AndroidSigningKeyAlias>
 	  <AndroidSigningKeyPass>010101</AndroidSigningKeyPass>
+	  <Optimize>False</Optimize>
+	  <AndroidEnableProfiledAot>False</AndroidEnableProfiledAot>
+	  <PublishTrimmed>False</PublishTrimmed>
+	  <AndroidUseAapt2>True</AndroidUseAapt2>
+	  <AndroidCreatePackagePerAbi>False</AndroidCreatePackagePerAbi>
+	  <RunAOTCompilation>False</RunAOTCompilation>
+	  <DebugType>none</DebugType>
 	</PropertyGroup>
 
 	<ItemGroup>

@@ -18,12 +18,16 @@ namespace EngeTerraPlan.ViewModels
         public ICommand CreateDensidadeCommand { get; }
         public ICommand RefreshItemsCommand { get; }
 
+        private readonly IDispatcher _dispatcher;
+
         public DensidadeInSituListViewModel()
         {
             DensidadeItems = new ObservableCollection<DensidadeInSituModel>();
             LoadItemsCommand = new Command(async () => await ExecuteLoadItemsCommand());
             CreateDensidadeCommand = new Command(async () => await ExecuteCreateDensidadeCommand());
             RefreshItemsCommand = new Command(async () => await ExecuteRefreshItemsCommand());
+
+            _dispatcher = Dispatcher.GetForCurrentThread() ?? throw new InvalidOperationException("Dispatcher não disponível.");
         }
 
         private async Task ExecuteLoadItemsCommand()
@@ -36,7 +40,7 @@ namespace EngeTerraPlan.ViewModels
                 var items = await Task.Run(() => DatabaseService.Database.Table<DensidadeInSituModel>().ToList());
                 foreach (var item in items)
                 {
-                    DensidadeItems.Add(item);
+                    _dispatcher.Dispatch(() => DensidadeItems.Add(item));
                 }
             }
             catch (Exception ex)
